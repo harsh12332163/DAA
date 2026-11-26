@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101923">
+  <title>Project Flow | Dependency Manager</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/" aria-label="Project Flow home">
+      <span class="brand-mark">PF</span>
+      <span>project<span class="brand-light">flow</span></span>
+    </a>
+    <div class="topbar-note"><span class="live-dot"></span> LOCAL WORKSPACE</div>
+  </header>
+
+  <main class="page-shell">
+    <section class="intro">
+      <p class="eyebrow">DESIGN &amp; ANALYSIS OF ALGORITHMS <span>·</span> PROJECT 10</p>
+      <h1>Make every next step <span>obvious.</span></h1>
+      <p class="intro-copy">Map task dependencies, spot circular blockers, and compare two classic scheduling algorithms.</p>
+    </section>
+
+    <section class="workspace" aria-label="Dependency manager">
+      <div class="editor-panel">
+        <div class="section-heading">
+          <div>
+            <p class="step-label">01 / DEFINE</p>
+            <h2>Project tasks</h2>
+          </div>
+          <button id="reset-button" class="text-button" type="button">Reset example</button>
+        </div>
+        <p class="helper">Add a task, then list the tasks that must finish before it can begin.</p>
+        <div id="task-list" class="task-list"></div>
+        <button id="add-task" class="add-task" type="button"><span>+</span> Add task</button>
+        <button id="analyze-button" class="primary-button" type="button">
+          <span>Generate execution plan</span><span aria-hidden="true">↗</span>
+        </button>
+        <p id="error-message" class="error-message" role="alert" hidden></p>
+      </div>
+
+      <div class="results-panel">
+        <div class="section-heading">
+          <div>
+            <p class="step-label">02 / EXECUTE</p>
+            <h2>Schedule &amp; analysis</h2>
+          </div>
+          <span class="algorithm-tag">BFS + DFS</span>
+        </div>
+        <div id="empty-state" class="empty-state">
+          <div class="empty-icon" aria-hidden="true"><span>01</span><i>→</i><span>02</span></div>
+          <h3>Your plan starts here</h3>
+          <p>Run the scheduler to see the valid execution order and how each algorithm performs.</p>
+        </div>
+        <div id="results" hidden>
+          <div id="cycle-banner" class="cycle-banner" hidden></div>
+          <div class="summary-row">
+            <div class="summary-card"><span class="summary-label">TASKS</span><strong id="task-count">0</strong></div>
+            <div class="summary-card"><span class="summary-label">DEPENDENCIES</span><strong id="dependency-count">0</strong></div>
+            <div class="summary-card"><span class="summary-label">STATUS</span><strong id="schedule-status">—</strong></div>
+          </div>
+          <div class="algorithm-results">
+            <article class="algorithm-card">
+              <div class="algorithm-title"><span class="algorithm-icon">B</span><div><h3>Kahn’s Algorithm</h3><p>Breadth-first search</p></div><span id="kahn-time" class="runtime"></span></div>
+              <ol id="kahn-order" class="execution-order"></ol>
+              <p id="kahn-cycle" class="algorithm-cycle" hidden></p>
+            </article>
+            <article class="algorithm-card">
+              <div class="algorithm-title"><span class="algorithm-icon dfs-icon">D</span><div><h3>DFS Topological Sort</h3><p>Depth-first search</p></div><span id="dfs-time" class="runtime"></span></div>
+              <ol id="dfs-order" class="execution-order"></ol>
+              <p id="dfs-cycle" class="algorithm-cycle" hidden></p>
+            </article>
+          </div>
+          <div class="complexity-note"><span class="complexity-symbol">O</span><p><strong>Both algorithms:</strong> O(V + E) time and space, where V is the number of tasks and E is the number of dependencies.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="benchmark-panel">
+      <div class="benchmark-copy">
+        <p class="step-label">03 / COMPARE</p>
+        <h2>See how they scale</h2>
+        <p>Compare five-run averages on generated dependency graphs of increasing size.</p>
+      </div>
+      <button id="benchmark-button" class="secondary-button" type="button">Run benchmark <span aria-hidden="true">↗</span></button>
+      <div id="benchmark-output" class="benchmark-output" hidden></div>
+    </section>
+
+    <footer><span>PROJECT FLOW</span><span>Topological sorting · Kahn’s BFS &amp; DFS</span></footer>
+  </main>
+  <script src="app.js" defer></script>
+</body>
+</html>
